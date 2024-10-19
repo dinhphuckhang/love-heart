@@ -1,260 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+/******************************************************************************
+START Glitch hello-app default styles
 
-/* RESET */
+The styles in this section do some minimal CSS resets, set default fonts and 
+colors, and handle the layout for our footer and "Remix on Glitch" button. If
+you're new to CSS they may seem a little complicated, but you can scroll down
+to this section's matching END comment to see page-specific styles.
+******************************************************************************/
+
+
+/* 
+  The style rules specify elements by type and by attributes such as class and ID
+  Each section indicates an element or elements, then lists the style properties to apply
+  See if you can cross-reference the rules in this file with the elements in index.html
+*/
+
+/* Our default values set as CSS variables */
+:root {
+  --color-bg: #69F7BE;
+  --color-text-main: #000000;
+  --color-primary: #FFFF00;
+  --wrapper-height: 87vh;
+  --image-max-width: 300px;
+  --image-margin: 3rem;
+  --font-family: "HK Grotesk";
+  --font-family-header: "HK Grotesk";
+}
+
+/* Basic page style resets */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
-:root {
-  /* COLORS */
-  --red-dk: #BA0025;
-  --red-md: #DC143C;
-  --pink-dk: #EB0674;
-  --pink-lt: #FFB6C1;
-  --purple-dk: #98006A;
-  --purple-md: #CE0090;
-  
-  --neutral-dk: #333;
-  --neutral-md: #999;
-  --neutral-mdlt: lightgray;
-  --neutral-lt: #fff;
-  /* FONT */
-  --font-sans: "Poppins", sans-serif;
-  --font-display: "Lobster", sans-serif;
+[hidden] {
+  display: none !important;
 }
 
-/* MAIN STYLES */
-body {
-  background: var(--pink-lt); 
-  font-family: var(--font-sans);
+/* Import fonts */
+@font-face {
+  font-family: HK Grotesk;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027")
+    format("opentype");
 }
-p {
-  font-size: 20px;
-  margin: 20px 0;
+@font-face {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
+    format("opentype");
 }
-h1, h2 {
-  font-family: var(--font-display);
-  font-size: 36px;
-  color: var(--red-dk);
-  text-shadow: 1px 2px 2px white;
-}
-button {
-  background: transparent;
-  border: none;
-  font-family: var(--font-sans);
+
+/* Our remix on glitch button */
+.btn--remix {
+  font-family: HK Grotesk;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  line-height: 1rem;
+  font-weight: 500;
+  height: 2.75rem;
+  align-items: center;
   cursor: pointer;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #000;
+  white-space: nowrap;
+  margin-left: auto;
 }
-/* this article is used to center the component within the viewport */
-article {
+.btn--remix img {
+  margin-right: 0.5rem;
+}
+.btn--remix:hover {
+  background-color: #D0FFF1;
+}
+
+/* Navigation grid */
+.footer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  justify-content: space-between;
+  margin: 1rem auto 0;
+  padding: 1rem 0 0.75rem 0;
   width: 100%;
+  flex-wrap: wrap;
+  border-top: 4px solid #fff;
 }
 
-/* MESSAGES */
-.message {
-  text-align: center;
-  margin-top: 40px;
+.footer a:not(.btn--remix):link,
+a:not(.btn--remix):visited {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.1rem;
+  color: #000;
+  text-decoration: none;
+  border-style: none;
 }
-.message-2 {
-  display: none;
-}
-
-/* ENVELOPE */
-
-/* envelope-container contains all elements of the featured component (you can think of it like your canvas area) */
-.envelope-container {
-  position: relative; /* needed to allow for positioning some elements as absolute within the container */
-  height: 450px;
-  width: 350px;
-}
-.envelope-base {
-  position: absolute;
-  bottom: 0;
-  height: 200px;
-  width: 100%;
-  border: 1px solid var(--neutral-md);
-  border-radius: 5px;
-  background: var(--neutral-lt);
-  box-shadow: 0px 10px 30px rgba(0,0,0,.3), 0px 8px 10px rgba(0,0,0,.3);
-  z-index: 1;
-}
-.envelope-flap {
-  position: absolute;
-  bottom: 50px;
-  height: 300px;
-  width: 100%;
-  z-index: 10;
-}
-.inner {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 50%;
-  width: 100%;
-}
-.inner-polygon {
-  fill: var(--neutral-lt); 
-  stroke: var(--neutral-md); 
-  stroke-width: 1;
-}
-.inner-open {
-  fill: var(--neutral-mdlt);
-}
-.outer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  overflow: hidden;
-}
-.outer-polygon {
-  fill: var(--neutral-lt); 
-  stroke: var(--neutral-md); 
-  stroke-width: 1;
-}
-.outer-open {
-  opacity: 1;
+.footer a:hover {
+  background: var(--color-primary);
 }
 
-/* HEART BUTTON */
-.heart-btn {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  bottom: 20px;
-  left: 145px;
-  color: var(--red-md);
-  font-size: 60px;
-  z-index: 1000;
-}
-.heart-btn:hover {
-  color: var(--purple-dk);
-}
-.heart-btn-text {
-  position: absolute;
-  font-size: 12px;
-  letter-spacing: .5px;
-  color: var(--neutral-lt);
-  z-index: 1000;
-}
-/* CLOSE BUTTON */
-.close-btn {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: var(--neutral-dk);
-  background: var(--pink-lt);
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  box-shadow: 0px 2px 6px rgba(0,0,0,.2);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: none;
-  z-index:10000;
-}
-.close-btn:hover {
-  color: var(--neutral-lt);
-  background: var(--red-md);
-  box-shadow: 0px 2px 4px rgba(0,0,0,.1);
+.footer .links {
+  padding: 0.5rem 1rem 1.5rem;
+  white-space: nowrap;
 }
 
-/* REUSABLE TOGGLE CLASSES */
-.hide {
-  display: none;
+.divider {
+  padding: 0 1rem;
 }
-.show {
-  display: block;
+/******************************************************************************
+END Glitch hello-app default styles
+******************************************************************************/
+
+body {
+  font-family: HK Grotesk;
+  background-color: var(--color-bg);
 }
 
-/* FLOATING HEARTS */
-.floating-hearts {
-  position: absolute;
+/* Page structure */
+.wrapper {
+  min-height: var(--wrapper-height);
+  display: grid;
+  place-items: center;
+  margin: 0 1rem;
+}
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-}
-.ri-heart-fill {
-  font-size: 22px;
-}
-.hearts-row {
-  display: flex;   
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  opacity: 0;
-}
-.animated {
-  animation-name: launch;
-  animation-iteration-count: 1;
-  animation-duration: 3s;
-  animation-fill-mode: forwards;
 }
 
-@keyframes launch {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+/* Very light scaling for our illustration */
+.title {
+  color: #2800FF;
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 100px;
+  line-height: 105%;
+  margin: 0;
 }
-.row-1 {
-  color: var(--red-dk);
+
+/* Very light scaling for our illustration */
+.illustration {
+  max-width: 100%;
+  max-height: var(--image-max-width);
+  margin-top: var(--image-margin);
 }
-.row-2 {
-  color: var(--red-md);
-  animation-delay: 300ms;
+
+/* Instructions */
+.instructions {
+  margin: 1rem auto 0;
 }
-.row-3 {
-  color: var(--pink-dk);
-  animation-delay: 600ms;
+
+/* Button - Add it from the README instructions */
+button,
+input {
+  font-family: inherit;
+  font-size: 100%;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  transition: 500ms;
 }
-.row-4 {
-  color: var(--purple-md);
-   animation-delay: 900ms;
+
+/* Subheading */
+h2 {
+  color: #2800FF;
 }
-.row-5 {
-  color: var(--purple-dk);
-  animation-delay: 1200ms;
+
+/* Interactive image */
+.illustration:active {
+  transform: translateY(5px);
 }
-.row-6 {
-  color: var(--purple-md);
-  animation-delay: 1500ms;
-  justify-content: flex-end;
-  padding-right: 50px;
-}
-.row-7 {
-  color: var(--pink-dk);
-  animation-delay: 1800ms;  
-  justify-content: flex-end;
-  padding-right: 36px;
-}
-.row-8 {
-  color: var(--red-md);
-  animation-delay: 2100ms;
-  justify-content: flex-end;
-  padding-right: 20px;
-}
-.row-9 {
-  color: var(--red-dk);
-  animation-delay: 2400ms;
-  justify-content: flex-end;
-  padding-right: 10px;
-}
-.row-10 {
-  color: var(--red-dk);
-  animation-delay: 2400ms;
-  justify-content: flex-end;
-  padding-right: 20px;
+
+/* Button dip
+- Toggling this class on and off will move it down and up again
+- The button transition property above determines the speed of the translate (500ms)
+*/
+.dipped {
+  transform: translateY(5px);
 }
